@@ -1,14 +1,15 @@
 <template>
   <div class="container">
     <div class="text-center mt-3">
-      <span class="badge badge-success">Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</span>
-      <span class="badge badge-secondary">Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</span>
+      <button class="btn btn-primary" v-on:click="todoFilterKey = 'all'">All: {{todos.length}}</button>
+      <button class="btn btn-success" v-on:click="todoFilterKey = 'completed'">Completed Tasks: {{todos.filter(todo => {return todo.status === true}).length}}</button>
+      <button class="btn btn-secondary" v-on:click="todoFilterKey = 'pending'">Pending Tasks: {{todos.filter(todo => {return todo.status === false}).length}}</button>
     </div>
 
     <hr>
 
     <div class="row">
-      <todo v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo" v-for="todo in todos" v-bind:todo="todo"></todo>
+      <todo v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo" v-for="todo in todoFilter" v-bind:todo="todo"></todo>
     </div>
 
     <hr>
@@ -23,9 +24,28 @@
 
     export default {
         props: ['todos'],
+        data() {
+            return {
+                todoFilterKey: 'all',
+            }
+        },
         components: {
             Todo,
             CreateTodo
+        },
+        computed: {
+            todoFilter() {
+                return this[this.todoFilterKey];
+            },
+            all() {
+                return this.todos;
+            },
+            completed() {
+                return this.todos.filter(todo => {return todo.status === true});
+            },
+            pending() {
+                return this.todos.filter(todo => {return todo.status === false});
+            }
         },
         methods: {
             deleteTodo(todo) {
@@ -37,7 +57,7 @@
             },
             completeTodo(todo) {
                 const todoIndex = this.todos.indexOf(todo);
-                this.todos[todoIndex].done = true;
+                this.todos[todoIndex].status = true;
             },
         },
     }

@@ -16,20 +16,24 @@ export default {
         return {
             todos: [{
                 title: 'Todo A',
-                project: 'Project A',
-                done: false,
+                description: 'Project A',
+                deadline: '2020-02-12',
+                status: false,
             }, {
                 title: 'Todo B',
-                project: 'Project B',
-                done: true,
+                description: 'Project B',
+                deadline: '2020-02-12',
+                status: true,
             }, {
                 title: 'Todo C',
-                project: 'Project C',
-                done: false,
+                description: 'Project C',
+                deadline: '2020-02-14',
+                status: false,
             }, {
                 title: 'Todo D',
-                project: 'Project D',
-                done: false,
+                description: 'Project D',
+                deadline: '2020-02-14',
+                status: true,
             }],
         };
     }

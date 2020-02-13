@@ -18,8 +18,12 @@
               <input v-model="titleText" type="text" class="form-control" id="title">
             </div>
             <div class="form-group">
-              <label for="project">Project</label>
-              <textarea v-model="projectText" class="form-control" id="project"></textarea>
+              <label for="description">Description</label>
+              <textarea v-model="descriptionText" class="form-control" id="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="deadline">Deadline</label>
+              <input v-model="deadlineText" type="date" class="form-control"  id="deadline">
             </div>
           </div>
           <div class="modal-footer">
@@ -37,22 +41,26 @@
         data() {
             return {
                 titleText: '',
-                projectText: '',
+                descriptionText: '',
+                deadlineText: '',
             };
         },
         methods: {
             saveTodo() {
-                if (this.titleText.length > 0 && this.projectText.length > 0) {
+                if (this.titleText.length > 0 && this.descriptionText.length > 0) {
                     const title = this.titleText;
-                    const project = this.projectText;
+                    const description = this.descriptionText;
+                    const deadline = this.deadlineText;
                     this.$emit('create-todo', {
                         title,
-                        project,
-                        done: false,
+                        description,
+                        deadline,
+                        status: false,
                     });
 
                     this.titleText = '';
-                    this.projectText = '';
+                    this.descriptionText = '';
+                    this.deadlineText = '';
 
                     $('#create-todo').modal('hide');
                 } else {
