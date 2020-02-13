@@ -1,23 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+      <todo-list v-bind:todos="todos"></todo-list>
   </div>
 </template>
 
 <script>
+import TodoList from './components/TodoList';
+
 export default {
-  name: 'App'
+    name: 'App',
+    components: {
+        TodoList,
+    },
+    data() {
+        return {
+            todos: [{
+                title: 'Todo A',
+                description: 'Project A',
+                deadline: '2020-02-12',
+                status: false,
+            }, {
+                title: 'Todo B',
+                description: 'Project B',
+                deadline: '2020-02-12',
+                status: true,
+            }, {
+                title: 'Todo C',
+                description: 'Project C',
+                deadline: '2020-02-14',
+                status: false,
+            }, {
+                title: 'Todo D',
+                description: 'Project D',
+                deadline: '2020-02-14',
+                status: true,
+            }],
+        };
+    }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
